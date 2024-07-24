@@ -17,10 +17,7 @@ function App() {
                 <Link to="/menu">Menu</Link>
               </li>
               <li className="nav-item">
-                <Link to="/sign-up">Sign Up</Link>
-              </li>
-              <li className="nav-item">
-                <Link to="/sign-in">Sign In</Link>
+                <Link to="/sign-in">Sign In/Join</Link>
               </li>
               <li className="nav-item">
                 <Link to="/cart">Cart</Link>
