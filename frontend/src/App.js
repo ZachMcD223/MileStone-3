@@ -4,6 +4,7 @@ import Menu from './components/Menu';
 import SignUpForm from './components/users/SignUpForm';
 import LoginForm from './components/users/LoginForm';
 import Cart from './components/Cart';
+import Header from './components/Header'
 import './App.css';
 
 function App() {
@@ -11,19 +12,7 @@ function App() {
     <div className="App">
       <Router>
       <header>
-        <nav className="navbar">
-            <ul className="nav-list">
-              <li className="nav-item">
-                <Link to="/menu">Menu</Link>
-              </li>
-              <li className="nav-item">
-                <Link to="/sign-in">Sign In/Join</Link>
-              </li>
-              <li className="nav-item">
-                <Link to="/cart">Cart</Link>
-              </li>
-            </ul>
-          </nav>
+      <Header/>
       </header>
       <main>
       <Routes>
