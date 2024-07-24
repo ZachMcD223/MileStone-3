@@ -7,9 +7,9 @@ import Logo from "./Logo";
 const NavLinks = () => {
   return (
     <>
-      <NavLink to="/menu" className="text-black text-3xl">Menu</NavLink>
-      <NavLink to="/sign-in" className="text-black text-3xl">Sign-In/Join</NavLink>
-      <NavLink to="/cart" className="text-black text-3xl">Cart</NavLink>
+      <NavLink to="/menu" className="text-black text-2xl p-6" style={{ marginRight: '50px'}}>Menu</NavLink>
+      <NavLink to="/sign-in" className="text-black text-2xl p-6" style={{ marginRight: '50px'}}>Sign-In/Join</NavLink>
+      <NavLink to="/cart" className="text-black text-2xl p-6" style={{ marginRight: '50px'}}>Cart</NavLink>
     </>
   );
 };

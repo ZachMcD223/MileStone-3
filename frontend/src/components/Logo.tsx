@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 const Logo = () => {
     return (
-    <div className="logo" style={{ width: '125px', height: '125px', margin: '-22px', marginLeft: '20px'}}>
+    <div className="logo" style={{ width: '125px', height: '125px', margin: '-22px', marginLeft: '30px'}}>
         <NavLink to="/"><img src="\images\chickenLogo.png" alt="logo from canva.com"/></NavLink>
     </div>
     )
