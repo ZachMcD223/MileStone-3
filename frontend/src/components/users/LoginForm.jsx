@@ -1,7 +1,7 @@
 // Potential login form but will be changed after database stuff
 import React, { useState } from "react";
-import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
-import '../../App.css';
+// import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
+import "../../App.css";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
@@ -17,18 +17,28 @@ export default function LoginForm() {
     console.log(data);
   };
 
-return (
-<div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
-  <div class="sm:mx-auto sm:w-full sm:max-w-sm">
-    {/* replace with chicken stuff  */}
-    {/* <img class="mx-auto h-10 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" alt="Your Company"></img> */}
-    <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign in to your account</h2>
-  </div>
+  return (
+    <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+      <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+        <img
+          class="mx-auto h-32 w-auto border-red-500"
+          src="\images\chickenLogo.png"
+          alt="logo from canva.com"
+        />
+        <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+          Sign in to your account
+        </h2>
+      </div>
 
-  <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm text-left">
+      <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm text-left">
         <form className="space-y-6" onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">Email address</label>
+            <label
+              htmlFor="email"
+              className="block text-sm font-medium leading-6 text-gray-900"
+            >
+              Email address
+            </label>
             <div className="mt-2">
               <input
                 id="email"
@@ -36,7 +46,7 @@ return (
                 type="email"
                 autoComplete="email"
                 required
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-600 sm:text-sm sm:leading-6"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
               />
@@ -45,7 +55,12 @@ return (
 
           <div>
             <div className="flex items-center justify-between">
-              <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">Password</label>
+              <label
+                htmlFor="password"
+                className="block text-sm font-medium leading-6 text-gray-900"
+              >
+                Password
+              </label>
             </div>
             <div className="mt-2">
               <input
@@ -54,7 +69,7 @@ return (
                 type="password"
                 autoComplete="current-password"
                 required
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-600 sm:text-sm sm:leading-6"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
@@ -71,11 +86,18 @@ return (
           </div>
         </form>
 
-    <p class="mt-10 text-center text-sm text-gray-500">
-      Don't have an account?
-      <a href="/sign-up" className="font-semibold leading-6 text-red-600 hover:text-red-500"> Sign Up</a>
-    </p>
-  </div>
-</div>
-)
+        <p class="mt-10 text-center text-sm text-gray-500">
+          Don't have an account?
+          <a
+            href="/sign-up"
+            className="font-semibold leading-6 text-red-600 hover:text-red-500"
+          >
+            {/* formatting removed a space after dont have an account? so this {" "} fixes it */}
+            {" "}
+            Sign Up
+          </a>
+        </p>
+      </div>
+    </div>
+  );
 }
