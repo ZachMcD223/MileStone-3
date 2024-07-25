@@ -1,9 +1,9 @@
-import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Home from './components/Home';
 import Menu from './components/Menu';
 import SignUpForm from './components/users/SignUpForm';
 import LoginForm from './components/users/LoginForm';
-import Cart from './components/Cart';
+import Checkout from './components/Checkout';
 import Header from './components/Header'
 import './App.css';
 
@@ -20,7 +20,7 @@ function App() {
          <Route path="/menu" element={<Menu />} />
          <Route path="/sign-up" element={<SignUpForm />} />
          <Route path="/sign-in" element={<LoginForm />} />
-         <Route path="/cart" element={<Cart />} />
+         <Route path="/Checkout" element={<Checkout />} />
       </Routes>
       </main>
       </Router>

@@ -1,10 +1,15 @@
 // with some help from https://www.youtube.com/watch?v=78YM00SO6uk
-import { useState } from "react";
+import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { Menu, X } from "lucide-react";
+import CartPopup from "./CartPopup";
 
+interface NavLinksProps {
+  handleCartClick: () => void;
+}
 
-const NavLinks = () => {
+// Needed typescript to make the cart closing outside of the box more simple
+const NavLinks: React.FC<NavLinksProps> = ({ handleCartClick }) => {
   return (
     <>
       <NavLink
@@ -27,9 +32,10 @@ const NavLinks = () => {
         Sign-In/Join
       </NavLink>
       <NavLink
-        to="/cart"
+        to="#"
         className="text-black text-2xl p-6 transition duration-300 hover:text-white"
         style={{ marginRight: "50px" }}
+        onClick={handleCartClick}
       >
         <img
           src="/images/shopping-cart-solid.svg"
@@ -41,19 +47,31 @@ const NavLinks = () => {
   );
 };
 
-const Nav = () => {
+const Nav: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
 
   const toggleNavbar = () => {
-    console.log("toggleNavbar");
     setIsOpen(!isOpen);
+  };
+
+  const handleCartClick = () => {
+    setIsCartOpen(!isCartOpen);
+  };
+
+  const closeCart = () => {
+    setIsCartOpen(false);
+  };
+
+  const handleCloseNavbar = () => {
+    setIsOpen(false);
   };
 
   return (
     <>
       <nav className="w-1/3 flex justify-end">
-        <div className="hidden md:flex w-full justify-between ">
-          <NavLinks />
+        <div className="hidden md:flex w-full justify-between">
+          <NavLinks handleCartClick={handleCartClick} />
         </div>
         <div className="md:hidden flex items-center">
           <button onClick={toggleNavbar}>{isOpen ? <X /> : <Menu />}</button>
@@ -61,8 +79,12 @@ const Nav = () => {
       </nav>
       {isOpen && (
         <div className="flex flex-col items-center basis-full">
-          <NavLinks />
+          <NavLinks handleCartClick={handleCartClick} />
         </div>
+      )}
+      <CartPopup isOpen={isCartOpen} onClose={closeCart} />
+      {isOpen && (
+        <div className="fixed inset-0 z-40" onClick={handleCloseNavbar}></div>
       )}
     </>
   );
