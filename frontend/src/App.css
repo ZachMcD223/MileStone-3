@@ -7,6 +7,13 @@
   text-align: center;
 }
 
+.bg-center {
+  background-position: center center;
+}
+.bg-cover {
+  background-size: cover;
+}
+
 
 /* menu css will replace later. maybe bootstrap */
 .menu-container {
