@@ -1,6 +1,6 @@
 const router = require('express').Router()
-const { where } = require('sequelize')
 const db = require("../models")
+const { Op } = require("sequelize");
 const bcrypt = require('bcrypt')
 
 const { Customer } = db

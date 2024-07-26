@@ -1,10 +1,10 @@
 const router = require('express').Router()
 const db = require("../models")
 const bcrypt = require('bcrypt')
-const { Stage, Event } = db;
-const { Op } = require("sequelize");
-
 const { Customer } = db
+const { Op } = require("sequelize");
+const Customer = require('../models/customers')
+
 
 router.post('/', async (req, res) => {
     let { password, ...rest } = req.body;
@@ -18,8 +18,8 @@ router.post('/', async (req, res) => {
 
 
 router.get('/', async (req, res) => {
-    const users = await Customer.findAll()
-    res.json(users)
+    const customers = await Customer.findAll()
+    res.json(customers)
 })
 
 module.exports = router
