@@ -5,7 +5,7 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const app = express();
 const cookieSession = require('cookie-session')
-//const defineCurrentUser = require('./middleware/defineCurrentUser')
+const defineCurrentUser = require('./middleware/defineCurrentUser')
 
 // Express Settings
 app.use(cookieSession({
@@ -20,17 +20,7 @@ app.use(cors({
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }))
 app.use(bodyParser.json())
-//app.use(defineCurrentUser)
-
-// SEQUELIZE CONNECTION
-// const sequelize = new Sequelize(process.env.PG_URI)
-
-// try {
-//     sequelize.authenticate() 
-//     console.log(`Connected with Sequelize at ${process.env.PG_URI}`) 
-// } catch(err) {
-//     console.log(`Unable to connect to PG: ${err}`) 
-// }
+app.use(defineCurrentUser)
 
 // Controllers & Routes
 
