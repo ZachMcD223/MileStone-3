@@ -1,4 +1,6 @@
 const router = require('express').Router()
+const { Order } = db
+const { Op } = require("sequelize");
 const Order = require('../models/orders')
 
 // Get all orders
