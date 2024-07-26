@@ -1,38 +1,10 @@
-* {
 
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 .App {
   text-align: center;
-}
-
-/* Navbar stuff */
-.navbar {
-  background-color: #333;
-  padding: 10px;
-}
-
-.nav-list {
-  list-style: none;
-  display: flex;
-  justify-content: space-around;
-  margin: 0;
-  padding: 0;
-}
-
-.nav-item {
-  margin: 0 10px;
-}
-
-.nav-item a {
-  color: white;
-  text-decoration: none;
-  padding: 10px;
-}
-
-.nav-item a:hover {
-  background-color: #575757;
-  border-radius: 5px;
 }
 
 
