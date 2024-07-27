@@ -2,9 +2,9 @@
 const {
   Model
 } = require('sequelize');
-module.exports = (sequelize, {
+module.exports = (sequelize, 
   DataTypes
-}) => {
+) => {
   class Customers extends Model {
     /**
      * Helper method for defining associations.
@@ -45,7 +45,7 @@ module.exports = (sequelize, {
   }, {
     sequelize,
     modelName: 'Customers',
-    tableName: 'customers',
+    tableName: 'Customers',
     timestamps: false
   });
   return Customers;

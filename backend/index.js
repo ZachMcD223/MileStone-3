@@ -5,8 +5,7 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const app = express();
 const cookieSession = require('cookie-session')
-const defineCurrentUser = require('./middleware/defineCurrentCustomer');
-const defineCurrentCustomer = require('./middleware/defineCurrentCustomer');
+const defineCurrentUser = require('./middleware/defineCurrentUser')
 
 // Express Settings
 app.use(cookieSession({
@@ -21,7 +20,7 @@ app.use(cors({
 app.use(express.static('public'))
 app.use(express.urlencoded({ extended: true }))
 app.use(bodyParser.json())
-app.use(defineCurrentCustomer)
+app.use(defineCurrentUser)
 
 // Controllers & Routes
 
@@ -29,9 +28,9 @@ app.use(express.urlencoded({ extended: true }))
 
 app.use('/orders', require('./controllers/orders'))
 app.use('/customers', require('./controllers/customers'))
-app.use('/authentication', require('./controllers/authentication'))
+//app.use('/authentication', require('./controllers/authentication'))
 
 // Listen for Connections
-app.listen(process.env.PORT, () => {
-    console.log(`Listening on ${process.env.PORT}`)
+app.listen(3000, () => {
+    console.log(`Listening on {3000}`)
 })
