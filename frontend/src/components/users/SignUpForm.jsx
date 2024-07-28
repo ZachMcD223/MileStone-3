@@ -5,7 +5,10 @@ export default function SignUpForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [name, setName] = useState("");
+  const [first_name, setFirstName] = useState("");  
+  const [last_name, setLastName] = useState("");   
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -13,15 +16,23 @@ export default function SignUpForm() {
       alert("Passwords do not match");
       return;
     }
-
-    const response = await fetch("/sign-up", {
+  
+    const response = await fetch("/customers/sign-up", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password, name }),
+      body: JSON.stringify({ email, password, first_name, last_name, phone, address }), 
     });
+  
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('Server error:', errorText);
+      return;
+    }
+  
     const data = await response.json();
     console.log(data);
   };
+  
 
   return (
     <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
@@ -33,17 +44,33 @@ export default function SignUpForm() {
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm text-left">
         <form className="space-y-6" onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900">Name</label>
+            <label htmlFor="first_name" className="block text-sm font-medium leading-6 text-gray-900">First Name</label> 
             <div className="mt-2">
               <input
-                id="name"
-                name="name"
+                id="first_name"   
+                name="first_name"  
                 type="text"
-                autoComplete="name"
+                autoComplete="given-name"
                 required
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-600 sm:text-sm sm:leading-6"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
+                value={first_name} 
+                onChange={(e) => setFirstName(e.target.value)}
+              />
+            </div>
+          </div>
+
+          <div>
+            <label htmlFor="last_name" className="block text-sm font-medium leading-6 text-gray-900">Last Name</label> 
+            <div className="mt-2">
+              <input
+                id="last_name" 
+                name="last_name"  
+                type="text"
+                autoComplete="family-name"
+                required
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-600 sm:text-sm sm:leading-6"
+                value={last_name}  
+                onChange={(e) => setLastName(e.target.value)}
               />
             </div>
           </div>
@@ -60,6 +87,38 @@ export default function SignUpForm() {
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-600 sm:text-sm sm:leading-6"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+          </div>
+
+          <div>
+            <label htmlFor="phone" className="block text-sm font-medium leading-6 text-gray-900">Phone</label>
+            <div className="mt-2">
+              <input
+                id="phone"
+                name="phone"
+                type="text"
+                autoComplete="tel"
+                required
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-600 sm:text-sm sm:leading-6"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
+              />
+            </div>
+          </div>
+
+          <div>
+            <label htmlFor="address" className="block text-sm font-medium leading-6 text-gray-900">Address</label>
+            <div className="mt-2">
+              <input
+                id="address"
+                name="address"
+                type="text"
+                autoComplete="street-address"
+                required
+                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-600 sm:text-sm sm:leading-6"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
               />
             </div>
           </div>
@@ -112,6 +171,5 @@ export default function SignUpForm() {
         </p>
       </div>
     </div>
-    
   );
 }

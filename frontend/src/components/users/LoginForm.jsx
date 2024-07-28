@@ -1,14 +1,13 @@
-// Potential login form but will be changed after database stuff
 import React, { useState } from "react";
-// import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
 import "../../App.css";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("/sign-in", {
+    const response = await fetch("/customers/sign-in", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
@@ -18,14 +17,14 @@ export default function LoginForm() {
   };
 
   return (
-    <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
-      <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+    <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+      <div className="sm:mx-auto sm:w-full sm:max-w-sm">
         <img
-          class="mx-auto h-32 w-auto border-red-500"
-          src="\images\chickenLogo.png"
+          className="mx-auto h-32 w-auto border-red-500"
+          src="/images/chickenLogo.png"
           alt="logo from canva.com"
         />
-        <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+        <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
           Sign in to your account
         </h2>
       </div>
@@ -86,13 +85,13 @@ export default function LoginForm() {
           </div>
         </form>
 
-        <p class="mt-10 text-center text-sm text-gray-500">
+        <p className="mt-10 text-center text-sm text-gray-500">
           Don't have an account?
           <a
-            href="/sign-up"
+            href="/customers/sign-up"
             className="font-semibold leading-6 text-red-600 hover:text-red-500"
           >
-            {/* formatting removed a space after dont have an account? so this {" "} fixes it */}
+            {/* helps with spacing */}
             {" "}
             Sign Up
           </a>

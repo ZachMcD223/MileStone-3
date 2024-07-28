@@ -1,17 +1,22 @@
-const db = require("../models")
-const { Customers } = db
+const db = require("../models");
+const { Customers } = db;
+
 async function defineCurrentCustomer(req, res, next) {
-    try {
-        let user = await Customers.findOne({
-            where: {
-                userId: req.session.userId
-            }
-        })
-        req.currentCustomer = user
-        } catch (e) {
-            req.currentCustomer = null
-            console.error(e)
+  try {
+    if (req.session.customer_id) {
+      let user = await Customers.findOne({
+        where: {
+          customer_id: req.session.customer_id,
+        },
+      });
+      req.currentCustomer = user;
+    } else {
+      req.currentCustomer = null;
     }
-    next()
+  } catch (e) {
+    req.currentCustomer = null;
+    console.error(e);
+  }
+  next();
 }
-module.exports = defineCurrentCustomer
+module.exports = defineCurrentCustomer;
