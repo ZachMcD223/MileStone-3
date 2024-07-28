@@ -17,7 +17,7 @@ export default function SignUpForm() {
       return;
     }
   
-    const response = await fetch("http://localhost:3000/customers/sign-up", {
+    const response = await fetch("/customers/sign-up", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password, first_name, last_name, phone, address }), 
