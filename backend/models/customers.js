@@ -41,6 +41,10 @@ module.exports = (sequelize,
     address: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+    passwordDigest: {
+      type: DataTypes.STRING,
+      allowNull: false
     }
   }, {
     sequelize,

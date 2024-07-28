@@ -1,7 +1,7 @@
 const router = require('express').Router()
 const db = require("../models")
 const bcrypt = require('bcrypt')
-// const { Customer } = db
+const { Customer } = db
 const { Op } = require("sequelize");
 const Customers = require('../models/customers')
 
@@ -63,8 +63,8 @@ router.post('/', async (req, res) => {
         //...rest,
         // role: 'reviewer',
         // passwordDigest: await bcrypt.hash(password, 12)
-    })
-    res.json(customers)
+ //   })
+   // res.json(customers)
 })
 
 

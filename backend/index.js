@@ -31,6 +31,6 @@ app.use('/customers', require('./controllers/customers'))
 // app.use('/authentication', require('./controllers/authentication'))
 
 // Listen for Connections
-app.listen(5000, () => {
-    console.log(`Listening on {5000}`)
+app.listen(3000, () => {
+    console.log(`Listening on {3000}`)
 })

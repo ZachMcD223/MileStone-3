@@ -1,7 +1,8 @@
 const db = require("../models")
-const { User } = db
+const { Customers } = db
 async function defineCurrentCustomer(req, res, next) {
     try {
+        if (req.session.customer_id) {}
         let user = await User.findOne({
             where: {
                 userId: req.session.userId
