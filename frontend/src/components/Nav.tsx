@@ -20,7 +20,7 @@ const NavLinks: React.FC<NavLinksProps> = ({ handleCartClick }) => {
         Menu
       </NavLink>
       <NavLink
-        to="/sign-in"
+        to="customers/sign-in"
         className="text-black text-2xl p-6 transition duration-300 hover:text-white flex items-center"
         style={{ marginRight: "50px" }}
       >

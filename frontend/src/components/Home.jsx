@@ -7,7 +7,7 @@ const Home = () => {
       <section className="h-screen flex flex-col items-center justify-center">
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold mb-4 mt-10">
-            Welcome to Our Restaurant
+            Welcome to Aztec Chicken
           </h1>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
@@ -15,7 +15,7 @@ const Home = () => {
             data-aos="fade-right"
             className="h-[1100px] bg-cover bg-center text-3xl p-8 rounded-lg"
             style={{
-              backgroundColor: "#FFD43B",
+              backgroundColor: "#b30000",
               boxShadow: "0 10px 20px rgba(0, 0, 0, 0.5)",
             }}
           >
@@ -24,7 +24,7 @@ const Home = () => {
                 About Us
               </h2>
               <p className="text-3xl text-center max-w-5xl mx-auto mb-8">
-                Established in 2024, our restaurant has quickly become a
+                Established in 2024, Aztec Chicken has quickly become a
                 favorite dining destination for both locals and visitors. Our
                 passion for food is reflected in every dish we serve. We believe
                 that great food starts with the freshest ingredients and a lot
