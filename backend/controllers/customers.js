@@ -1,9 +1,9 @@
 const router = require('express').Router()
 const db = require("../models")
 const bcrypt = require('bcrypt')
-// const { Customer } = db
+const { Customer } = db
 const { Op } = require("sequelize");
-const Customer = require('../models/customers')
+// const Customer = require('../models/customers')
 
 
 // router.get('/', async (req, res) => {

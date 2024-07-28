@@ -2,11 +2,11 @@ const router = require('express').Router()
 const db = require("../models")
 const { Op } = require("sequelize");
 const bcrypt = require('bcrypt')
-const { Customer } = db
+const { Customers } = db
 
 
 router.post('/', async (req, res) => {
-    let customer = await Customer.findOne({
+    let customer = await Customers.findOne({
         where: { email: req.body.email }
     })
 
