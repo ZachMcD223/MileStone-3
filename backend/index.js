@@ -31,6 +31,6 @@ app.use('/customers', require('./controllers/customers'))
 //app.use('/authentication', require('./controllers/authentication'))
 
 // Listen for Connections
-app.listen(3000, () => {
-    console.log(`Listening on {3000}`)
+app.listen(process.env.PORT, () => {
+    console.log(`Listening on ${process.env.PORT}`)
 })
