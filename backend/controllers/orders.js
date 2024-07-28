@@ -1,20 +1,21 @@
 const router = require('express').Router()
+// const { Order } = db
 //const { Order } = db
 const { Op } = require("sequelize");
 const Order = require('../models/orders')
 
 // Get all orders
-router.getAllOrders = async (req, res) => {
+router.get('/', async (req, res) => {
   try {
     const orders = await Order.find();
     res.json(orders);
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
-};
+});
 
 // Get a single order by ID
-router.getOrderById = async (req, res) => {
+router.get('/:id', async (req, res) => {
   try {
     const order = await Order.findById(req.params.id);
     if (order == null) {
@@ -24,10 +25,10 @@ router.getOrderById = async (req, res) => {
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
-};
+});
 
 // Create a new order
-router.createOrder = async (req, res) => {
+router.post('/', async (req, res) => {
   const order = new Order({
     customerName: req.body.customerName,
     items: req.body.items,
@@ -40,10 +41,10 @@ router.createOrder = async (req, res) => {
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
-};
+});
 
 // Update an order
-router.updateOrder = async (req, res) => {
+router.put('/:id', async (req, res) => {
   try {
     const order = await Order.findById(req.params.id);
     if (order == null) {
@@ -66,10 +67,10 @@ router.updateOrder = async (req, res) => {
   } catch (err) {
     res.status(400).json({ message: err.message });
   }
-};
+});
 
 // Delete an order
-router.deleteOrder = async (req, res) => {
+router.delete('/:id', async (req, res) => {
   try {
     const order = await Order.findById(req.params.id);
     if (order == null) {
@@ -81,6 +82,6 @@ router.deleteOrder = async (req, res) => {
   } catch (err) {
     res.status(500).json({ message: err.message });
   }
-};
+});
 
-module.exports = router
+module.exports = router;

@@ -2,8 +2,8 @@ const router = require('express').Router()
 const db = require("../models")
 const { Op } = require("sequelize");
 const bcrypt = require('bcrypt')
-
 const { Customer } = db
+
 
 router.post('/', async (req, res) => {
     let customer = await Customer.findOne({
@@ -16,7 +16,7 @@ router.post('/', async (req, res) => {
         })
     } else {
         req.session.customerId = customer.customerId
-        // console.log(req)
+        console.log(req)
         res.json({ customer })
     }
 })
