@@ -25,8 +25,8 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/menu" element={<Menu />} />
-            <Route path="/sign-up" element={<SignUpForm />} />
-            <Route path="/sign-in" element={<LoginForm />} />
+            <Route path="customers/sign-up" element={<SignUpForm />} />
+            <Route path="customers/sign-in" element={<LoginForm />} />
             <Route path="/checkout" element={<Checkout />} />
           </Routes>
         </main>

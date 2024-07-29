@@ -14,7 +14,7 @@ app.use(cookieSession({
     maxAge: 24 * 60 * 60 * 1000 // 24 hours
 }))
 app.use(cors({
-    origin: 'http://localhost:5000',
+    origin: 'http://localhost:3000',
     credentials: true
 }))
 app.use(express.static('public'))
@@ -28,7 +28,7 @@ app.use(express.urlencoded({ extended: true }))
 
 app.use('/orders', require('./controllers/orders'))
 app.use('/customers', require('./controllers/customers'))
-// app.use('/authentication', require('./controllers/authentication'))
+app.use('/authentication', require('./controllers/authentication'))
 
 // Listen for Connections
 app.listen(3000, () => {
