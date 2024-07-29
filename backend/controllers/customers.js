@@ -2,18 +2,9 @@ const router = require('express').Router()
 const db = require("../models")
 const bcrypt = require('bcrypt')
 const { Customers } = db
-const { Customer } = db
 const { Op } = require("sequelize");
 // const Customers = require('../models/customers')
 
-
-// router.get('/', async (req, res) => {
-//     const customers = await Customers.findAll()
-//     res.json(customers)
-// })
-
-
-// module.exports = router
 
 // Get all customers
 router.get('/', async (req, res) => {
@@ -37,24 +28,6 @@ router.get('/:id', async (req, res) => {
     res.status(500).json({ message: err.message });
   }
 });
-
-// Create a new customer
-// router.post('/', async (req, res) => {
-//   const customer = new Customers({
-//     first_name: req.body.name,
-//     last_name: req.body.name,
-//     email: req.body.email,
-//     phone: req.body.phone,
-//     address: req.body.address
-//   });
-
-//   try {
-//     const newCustomers = await customer.save();
-//     res.status(201).json(newCustomers);
-//   } catch (err) {
-//     res.status(400).json({ message: err.message });
-//   }
-// });
 
 router.post('/', async (req, res) => {
     let { password, ...rest } = req.body;
