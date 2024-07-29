@@ -61,7 +61,7 @@ router.get('/:id', async (req, res) => {
 //   }
 // });
 
-router.post('/', async (req, res) => {
+router.post('/sign-up', async (req, res) => {
     let { password, ...rest } = req.body;
     const customer = await Customers.create({
         ...rest,
