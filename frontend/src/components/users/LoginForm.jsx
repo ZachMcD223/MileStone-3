@@ -10,7 +10,6 @@ export default function LoginForm() {
   const navigate = useNavigate();
   const { setCurrentCustomer } = useContext(CurrentCustomer); 
 
-  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
