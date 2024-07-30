@@ -1,31 +1,44 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
+import { CurrentCustomer } from "./CurrentCustomer";
 import "../../App.css";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(""); 
+  const { setCurrentCustomer } = useContext(CurrentCustomer); 
 
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    const response = await fetch("http://localhost:3000/customers/sign-in", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
+    e.preventDefault();
 
-    if (!response.ok) {
-      console.error('Login error:', await response.text())
-      return;
+    try {
+      const response = await fetch("http://localhost:3000/authentication/sign-in", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+        credentials: "include"
+      });
+      
+      if (!response.ok) {
+        const errorText = await response.text();
+        setError(errorText);  
+        console.error('Login error:', errorText);
+        return;
+      }
+
+      const data = await response.json();
+      console.log('Login response data:', data);
+
+      setCurrentCustomer(data.customer); 
+      navigate('/menu'); 
+    } catch (error) {
+      console.error('Network error:', error);
+      setError('A network error occurred. Please try again.');
     }
-    
-    const data = await response.json();
-    console.log(data);
-
-    navigate('/customers/profile')
-  }
+  };
 
   return (
     <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
@@ -85,6 +98,12 @@ export default function LoginForm() {
               />
             </div>
           </div>
+
+          {error && (
+            <div className="text-red-600 text-sm mt-2">
+              {error}
+            </div>
+          )}
 
           <div>
             <button
