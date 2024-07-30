@@ -4,6 +4,7 @@ import { Menu as MenuIcon, X } from "lucide-react";
 import CartPopup from "./CartPopup";
 import { useCart } from "./CartProvider";
 import { CurrentCustomer } from "./users/CurrentCustomer"; 
+import { CartItem } from "./CartPopup";
 
 interface NavLinksProps {
   handleCartClick: () => void;
@@ -51,7 +52,7 @@ const NavLinks: React.FC<NavLinksProps> = ({ handleCartClick }) => {
 const Nav: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
-  const { cartItems } = useCart();
+  const { items, updateItemQuantity } = useCart();
 
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
@@ -84,7 +85,7 @@ const Nav: React.FC = () => {
           <NavLinks handleCartClick={handleCartClick} />
         </div>
       )}
-      <CartPopup isOpen={isCartOpen} onClose={closeCart} items={cartItems} />
+     <CartPopup isOpen={isCartOpen} onClose={closeCart} items={items} updateItemQuantity={updateItemQuantity} />
       {isOpen && (
         <div className="fixed inset-0 z-40" onClick={handleCloseNavbar}></div>
       )}

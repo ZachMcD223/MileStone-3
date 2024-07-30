@@ -27,18 +27,24 @@ router.get('/:id', async (req, res) => {
 });
 
 // Create a new order
-router.post('/', async (req, res) => {
-  const order = new Order({
-    customerName: req.body.customerName,
-    items: req.body.items,
-    totalAmount: req.body.items.reduce((sum, item) => sum + (item.price * item.quantity), 0)
-  });
-
+router.post('/orders', async (req, res) => {
   try {
-    const newOrder = await order.save();
-    res.status(201).json(newOrder);
-  } catch (err) {
-    res.status(400).json({ message: err.message });
+    const { customer_id, total } = req.body; 
+
+    if (!customer_id || !total) {
+      return res.status(400).json({ message: 'Missing required fields' });
+    }
+
+    const order = await Order.create({
+      customer_id,
+      order_date: new Date(), 
+      total,
+    });
+
+    res.status(201).json(order);
+  } catch (error) {
+    console.error('Error creating order:', error);
+    res.status(500).json({ message: 'Internal Server Error' });
   }
 });
 
