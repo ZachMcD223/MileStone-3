@@ -7,10 +7,10 @@ const Menu: React.FC = () => {
   const { addToCart } = useCart();
 
   const items: CartItem[] = [
-    { id: 1, name: "Chicken", price: 7.99 },
-    { id: 2, name: "Fries", price: 3.99 },
-    { id: 3, name: "Soda", price: 2.99 },
-    { id: 4, name: "Combo", price: 12.99 },
+    { id: 1, name: "Chicken", price: 7.99, quantity: 1 },
+    { id: 2, name: "Fries", price: 3.99, quantity: 1 },
+    { id: 3, name: "Soda", price: 2.99, quantity: 1 },
+    { id: 4, name: "Combo", price: 12.99, quantity: 1 },
   ];
 
   return (
@@ -42,3 +42,4 @@ const Menu: React.FC = () => {
 };
 
 export default Menu;
+

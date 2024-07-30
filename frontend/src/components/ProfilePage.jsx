@@ -15,9 +15,9 @@ const ProfilePage = () => {
     }, [currentCustomer]);
 
     const handleLogout = () => {
-        // Clear current customer state
+        
         setCurrentCustomer(null);
-        // Redirect to login page or home page
+        
         navigate('/customers/sign-in');
     };
 
