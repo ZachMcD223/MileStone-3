@@ -7,10 +7,11 @@ export default function SignUpForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const [first_name, setfirst_name] = useState("");  
-  const [last_name, setlast_name] = useState("");   
+  const [first_name, setfirst_name] = useState("");
+  const [last_name, setlast_name] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
+  const navigate = useNavigate();
 
   const navigate = useNavigate();
 
@@ -21,7 +22,7 @@ export default function SignUpForm() {
     const response = await fetch("http://localhost:3000/customers/sign-up", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password, first_name, last_name, phone, address }), 
+      body: JSON.stringify({ email, password, first_name, last_name, phone, address }),
     });
   
     if (!response.ok) {

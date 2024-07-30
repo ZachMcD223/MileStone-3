@@ -4,8 +4,10 @@ import Home from "./components/Home";
 import Menu from "./components/Menu";
 import SignUpForm from "./components/users/SignUpForm";
 import LoginForm from "./components/users/LoginForm";
+import CurrentCustomer from "./components/contexts/CurrentCustomer";
 import Checkout from "./components/Checkout";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 import { CartProvider, useCart } from "./components/CartProvider";
 import CartPopup from "./components/CartPopup";
 import ProfilePage from "./components/ProfilePage";
@@ -39,10 +41,12 @@ function App() {
             <Route path="/menu" element={<Menu />} />
             <Route path="customers/sign-up" element={<SignUpForm />} />
             <Route path="customers/sign-in" element={<LoginForm />} />
-            
-            <Route path="customers/profile" element={<ProfilePage />} />
+            <Route path="/checkout" element={<Checkout />} />
           </Routes>
         </main>
+        <footer>
+          <Footer />
+        </footer>
       </Router>
     </div>
     </CartProvider>

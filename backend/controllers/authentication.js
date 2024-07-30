@@ -17,6 +17,16 @@ router.post('/sign-in', async (req, res) => {
 });
 
 
+// router.get('/sign-in', async (req, res) => {
+//     let { password, ...rest } = req.body;
+//     const customer = await Customers.create({
+//         ...rest,
+//         role: 'reviewer',
+//         passwordDigest: await bcrypt.hash(password, 12)
+//     })
+//     res.json(customer)
+// })
+
 router.get('/profile', async (req, res) => {
     if (!req.session.customerId) {
         return res.status(401).json({ message: 'Not authenticated' });
