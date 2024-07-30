@@ -1,19 +1,42 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { useNavigate } from 'react-router-dom';
+import { CurrentCustomer } from "./CurrentCustomer";
 import "../../App.css";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(""); 
+  const navigate = useNavigate();
+  const { setCurrentCustomer } = useContext(CurrentCustomer); 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await fetch("/customers/sign-in", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
-    const data = await response.json();
-    console.log(data);
+
+    try {
+      const response = await fetch("http://localhost:3000/authentication/sign-in", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+        credentials: "include"
+      });
+      
+      if (!response.ok) {
+        const errorText = await response.text();
+        setError(errorText);  
+        console.error('Login error:', errorText);
+        return;
+      }
+
+      const data = await response.json();
+      console.log('Login response data:', data);
+
+      setCurrentCustomer(data.customer); 
+      navigate('/menu'); 
+    } catch (error) {
+      console.error('Network error:', error);
+      setError('A network error occurred. Please try again.');
+    }
   };
 
   return (
@@ -75,6 +98,12 @@ export default function LoginForm() {
             </div>
           </div>
 
+          {error && (
+            <div className="text-red-600 text-sm mt-2">
+              {error}
+            </div>
+          )}
+
           <div>
             <button
               type="submit"
@@ -89,9 +118,8 @@ export default function LoginForm() {
           Don't have an account?
           <a
             href="/customers/sign-up"
-            className="font-semibold leading-6 text-red-600 hover:text-red-500" 
+            className="font-semibold leading-6 text-red-600 hover:text-red-500"
           >
-            {/* helps with spacing */}
             {" "}
             Sign Up
           </a>
