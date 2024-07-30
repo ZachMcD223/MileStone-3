@@ -21,6 +21,16 @@ router.post('/', async (req, res) => {
     }
 })
 
+// router.get('/sign-in', async (req, res) => {
+//     let { password, ...rest } = req.body;
+//     const customer = await Customers.create({
+//         ...rest,
+//         role: 'reviewer',
+//         passwordDigest: await bcrypt.hash(password, 12)
+//     })
+//     res.json(customer)
+// })
+
 router.get('/profile', async (req, res) => {
     res.json(req.currentCustomer)
 })

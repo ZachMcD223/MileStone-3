@@ -1,26 +1,26 @@
 import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import '../../App.css';
+
 
 export default function SignUpForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [first_name, setFirstName] = useState("");  
-  const [last_name, setLastName] = useState("");   
+
+  const [first_name, setfirst_name] = useState("");
+  const [last_name, setlast_name] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (password !== confirmPassword) {
-      alert("Passwords do not match");
-      return;
-    }
-  
-    const response = await fetch("/customers/sign-up", {
+
+
+    const response = await fetch("http://localhost:3000/customers/sign-up", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password, first_name, last_name, phone, address }), 
+      body: JSON.stringify({ email, password, first_name, last_name, phone, address }),
     });
   
     if (!response.ok) {
@@ -31,8 +31,10 @@ export default function SignUpForm() {
   
     const data = await response.json();
     console.log(data);
+
+    navigate('/customers/sign-in')
+
   };
-  
 
   return (
     <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
@@ -44,33 +46,33 @@ export default function SignUpForm() {
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm text-left">
         <form className="space-y-6" onSubmit={handleSubmit}>
           <div>
-            <label htmlFor="first_name" className="block text-sm font-medium leading-6 text-gray-900">First Name</label> 
+            <label htmlFor="firstName" className="block text-sm font-medium leading-6 text-gray-900">First Name</label> 
             <div className="mt-2">
               <input
                 id="first_name"   
-                name="first_name"  
+                name="firstName"  
                 type="text"
                 autoComplete="given-name"
                 required
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-600 sm:text-sm sm:leading-6"
                 value={first_name} 
-                onChange={(e) => setFirstName(e.target.value)}
+                onChange={(e) => setfirst_name(e.target.value)}
               />
             </div>
           </div>
 
           <div>
-            <label htmlFor="last_name" className="block text-sm font-medium leading-6 text-gray-900">Last Name</label> 
+            <label htmlFor="lastName" className="block text-sm font-medium leading-6 text-gray-900">Last Name</label> 
             <div className="mt-2">
               <input
                 id="last_name" 
-                name="last_name"  
+                name="lastName"  
                 type="text"
                 autoComplete="family-name"
                 required
                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-600 sm:text-sm sm:leading-6"
                 value={last_name}  
-                onChange={(e) => setLastName(e.target.value)}
+                onChange={(e) => setlast_name(e.target.value)}
               />
             </div>
           </div>
@@ -138,23 +140,6 @@ export default function SignUpForm() {
               />
             </div>
           </div>
-
-          <div>
-            <label htmlFor="confirmPassword" className="block text-sm font-medium leading-6 text-gray-900">Confirm Password</label>
-            <div className="mt-2">
-              <input
-                id="confirmPassword"
-                name="confirmPassword"
-                type="password"
-                autoComplete="new-password"
-                required
-                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-red-600 sm:text-sm sm:leading-6"
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-              />
-            </div>
-          </div>
-
           <div>
             <button
               type="submit"

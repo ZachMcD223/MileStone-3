@@ -1,20 +1,31 @@
 import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import "../../App.css";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const navigate = useNavigate();
+
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    const response = await fetch("/customers/sign-in", {
+    e.preventDefault()
+    const response = await fetch("http://localhost:3000/customers/sign-in", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),
     });
+
+    if (!response.ok) {
+      console.error('Login error:', await response.text())
+      return;
+    }
+    
     const data = await response.json();
     console.log(data);
-  };
+
+    navigate('/customers/profile')
+  }
 
   return (
     <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
@@ -91,7 +102,6 @@ export default function LoginForm() {
             href="/customers/sign-up"
             className="font-semibold leading-6 text-red-600 hover:text-red-500"
           >
-            {/* helps with spacing */}
             {" "}
             Sign Up
           </a>
