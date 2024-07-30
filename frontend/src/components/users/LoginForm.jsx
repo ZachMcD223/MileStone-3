@@ -89,7 +89,7 @@ export default function LoginForm() {
           Don't have an account?
           <a
             href="/customers/sign-up"
-            className="font-semibold leading-6 text-red-600 hover:text-red-500"
+            className="font-semibold leading-6 text-red-600 hover:text-red-500" 
           >
             {/* helps with spacing */}
             {" "}
