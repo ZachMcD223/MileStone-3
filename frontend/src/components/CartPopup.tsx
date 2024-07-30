@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "./CartProvider";
+import { CurrentCustomer } from "./users/CurrentCustomer";
 
 export interface CartItem {
   id: number;
@@ -18,6 +19,7 @@ interface CartPopupProps {
 
 const CartPopup: React.FC<CartPopupProps> = ({ isOpen, onClose, items, updateItemQuantity, }) => {
   const { removeFromCart, clearCart } = useCart();
+  const { currentCustomer } = React.useContext(CurrentCustomer);
   const popupRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
 
@@ -44,13 +46,43 @@ const CartPopup: React.FC<CartPopupProps> = ({ isOpen, onClose, items, updateIte
 
   if (!isOpen) return null;
 
-  const handleCheckoutClick = () => {
-    clearCart(); 
+ const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+ const handleCheckoutClick = async () => {
+  if (!currentCustomer || !currentCustomer.customer_id) {
+    alert("Please log in to proceed with the checkout.");
+    return;
+  }
+
+  try {
+    const response = await fetch("http://localhost:3000/orders", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        order_date: new Date().toISOString(),
+        total: total.toFixed(2),
+        customer_id: currentCustomer.customer_id,
+      }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to create order");
+    }
+
+    const orderData = await response.json();
+    console.log("Order created:", orderData);
+
+    clearCart();
     navigate("/");
     onClose();
-  };
+  } catch (error) {
+    console.error("Error during checkout:", error);
+  }
+};
 
-  const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+ 
 
   return (
     <>
