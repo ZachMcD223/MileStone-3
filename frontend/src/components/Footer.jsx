@@ -6,7 +6,7 @@ import GitHubIcon from './GitHub.png';
 
 export const Footer = () => {
 return (
-    <footer className="bg-DarkRed sticky top-0 flex-wrap z-[20] mx-auto flex w-full items-center justify-between border-b border-gray-500 p-6">
+    <footer className="bg-DarkRed sticky absolute bottom-0 flex-wrap z-[20] mx-auto flex w-full items-center justify-between border-b border-gray-500 p-6">
     <div className="container mx-auto px-4">
         <div className="flex flex-wrap md:justify-between">
         <div className="w-full md:w-1/3 mb-6 md:mb-0">
