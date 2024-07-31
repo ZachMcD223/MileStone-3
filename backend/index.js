@@ -31,8 +31,8 @@ app.use('/customers', require('./controllers/customers'));
 app.use('/authentication', require('./controllers/authentication'));
 
 // Listen for Connections
-app.listen(3001, () => {
-    console.log(`Listening on {3001}`)
+app.listen(3000, () => {
+    console.log(`Listening on {3000}`)
 })
 app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../build/index.html'))

@@ -1,7 +1,5 @@
 import React, { useState, useContext } from "react";
-import React, { useState, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
-import { CurrentCustomer } from "./CurrentCustomer";
 import { CurrentCustomer } from "./CurrentCustomer";
 import "../../App.css";
 
@@ -9,8 +7,8 @@ export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(""); 
+  const navigate = useNavigate();
   const { setCurrentCustomer } = useContext(CurrentCustomer); 
-
 
   const handleSubmit = async (e) => {
     e.preventDefault();
