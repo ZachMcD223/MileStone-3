@@ -35,5 +35,5 @@ app.listen(3000, () => {
     console.log(`Listening on {3000}`)
 })
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../build/index.html'))
+    res.sendFile(path.join(__dirname, '../frontend/build/index.html'))
 })
