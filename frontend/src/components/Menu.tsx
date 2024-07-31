@@ -16,7 +16,7 @@ const Menu: React.FC = () => {
   return (
     <div className="min-h-full flex flex-col justify-center px-6 py-12 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <h2 className="text-center text-2xl font-bold leading-9 tracking-tight text-gray-900 mb-8 bg-white-100">Menu</h2>
+        <h2 className="text-center text-2xl font-bold leading-9 tracking-tight text-gray-900 mb-8 bg-white-100 ">Menu</h2>
       </div>
 
       <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-md">

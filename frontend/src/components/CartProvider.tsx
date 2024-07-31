@@ -38,7 +38,7 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     setItems((prevItems) =>
       prevItems.map((item) =>
         item.id === id ? { ...item, quantity: Math.max(0, quantity) } : item
-      ).filter(item => item.quantity > 0) // Remove items with quantity 0
+      ).filter(item => item.quantity > 0)
     );
   };
 

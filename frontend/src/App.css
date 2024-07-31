@@ -26,3 +26,7 @@ body {
 #cartpopup{
   z-index: 0;
 }
+
+main {
+  flex: 1;
+}
