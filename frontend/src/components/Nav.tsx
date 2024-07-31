@@ -1,15 +1,18 @@
-// with some help from https://www.youtube.com/watch?v=78YM00SO6uk
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { NavLink } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Menu as MenuIcon, X } from "lucide-react";
 import CartPopup from "./CartPopup";
+import { useCart } from "./CartProvider";
+import { CurrentCustomer } from "./users/CurrentCustomer"; 
+import { CartItem } from "./CartPopup";
 
 interface NavLinksProps {
   handleCartClick: () => void;
 }
 
-// Needed typescript to make the cart closing outside of the box more simple
 const NavLinks: React.FC<NavLinksProps> = ({ handleCartClick }) => {
+  const { currentCustomer } = useContext(CurrentCustomer); 
+
   return (
     <>
       <NavLink
@@ -20,29 +23,28 @@ const NavLinks: React.FC<NavLinksProps> = ({ handleCartClick }) => {
         Menu
       </NavLink>
       <NavLink
-        to="customers/sign-in"
+        to={currentCustomer ? "/customers/profile" : "/customers/sign-in"} 
         className="text-black text-2xl p-6 transition duration-300 hover:text-white flex items-center"
         style={{ marginRight: "50px" }}
       >
         <img
           src="/images/user-solid.svg"
-          alt="User icon from FontAwesome"
+          alt="User icon"
           className="h-8 w-8 mr-3 inline-block align-middle"
         />
-        Sign-In/Join
+        {currentCustomer ? "Profile" : "Sign-In/Join"} 
       </NavLink>
-      <NavLink
-        to="#"
+      <button
         className="text-black text-2xl p-6 transition duration-300 hover:text-white"
         style={{ marginRight: "50px" }}
         onClick={handleCartClick}
       >
         <img
           src="/images/shopping-cart-solid.svg"
-          alt="shopping cart icon from FontAwesome"
+          alt="Shopping cart icon"
           className="h-8 w-8 inline-block align-middle"
         />
-      </NavLink>
+      </button>
     </>
   );
 };
@@ -50,13 +52,14 @@ const NavLinks: React.FC<NavLinksProps> = ({ handleCartClick }) => {
 const Nav: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const { items, updateItemQuantity } = useCart();
 
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
   };
 
   const handleCartClick = () => {
-    setIsCartOpen(!isCartOpen);
+    setIsCartOpen(true);
   };
 
   const closeCart = () => {
@@ -74,7 +77,7 @@ const Nav: React.FC = () => {
           <NavLinks handleCartClick={handleCartClick} />
         </div>
         <div className="md:hidden flex items-center">
-          <button onClick={toggleNavbar}>{isOpen ? <X /> : <Menu />}</button>
+          <button onClick={toggleNavbar}>{isOpen ? <X /> : <MenuIcon />}</button>
         </div>
       </nav>
       {isOpen && (
@@ -82,7 +85,7 @@ const Nav: React.FC = () => {
           <NavLinks handleCartClick={handleCartClick} />
         </div>
       )}
-      <CartPopup isOpen={isCartOpen} onClose={closeCart} />
+     <CartPopup isOpen={isCartOpen} onClose={closeCart} items={items} updateItemQuantity={updateItemQuantity} />
       {isOpen && (
         <div className="fixed inset-0 z-40" onClick={handleCloseNavbar}></div>
       )}
