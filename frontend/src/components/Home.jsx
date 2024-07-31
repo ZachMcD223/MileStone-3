@@ -61,7 +61,7 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="my-16 p-8 rounded-lg bg-white">
+      <section className="my-16 p-8 rounded-lg bg-#f3f4f6">
         <h2 className="text-5xl font-semibold text-center mb-8">Enjoy</h2>
         <p className="text-3xl text-center max-w-3xl mx-auto">
           Our locations in both California and Texas offer the best chicken you

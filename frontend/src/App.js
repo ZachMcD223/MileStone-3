@@ -8,28 +8,39 @@ import CurrentCustomer from "./components/contexts/CurrentCustomer";
 import Checkout from "./components/Checkout";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import { CartProvider, useCart } from "./components/CartProvider";
+import CartPopup from "./components/CartPopup";
+import ProfilePage from "./components/ProfilePage";
 import "aos/dist/aos.css";
 import "./App.css";
 import AOS from "aos";
+import CurrentCustomerProvider from "./components/users/CurrentCustomer";
 
 function App() {
   useEffect(() => {
     AOS.init({ duration: 1000 });
   }, []);
 
+  const CartWrapper = () => {
+    const { cartItems } = useCart();
+    return <CartPopup items={cartItems} />;
+  };
+
   return (
+    <CurrentCustomerProvider>
+    <CartProvider>
     <div className="App">
       <Router>
         <header>
           <Header />
         </header>
+        <CartWrapper />
         <main>
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/menu" element={<Menu />} />
             <Route path="customers/sign-up" element={<SignUpForm />} />
             <Route path="customers/sign-in" element={<LoginForm />} />
-            <Route path="customers/profile" element={<CurrentCustomer />} />
             <Route path="/checkout" element={<Checkout />} />
           </Routes>
         </main>
@@ -38,6 +49,8 @@ function App() {
         </footer>
       </Router>
     </div>
+    </CartProvider>
+    </CurrentCustomerProvider>
   );
 }
 

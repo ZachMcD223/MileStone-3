@@ -1,5 +1,7 @@
 import React, { useState, useContext } from "react";
+import React, { useState, useContext } from "react";
 import { useNavigate } from 'react-router-dom';
+import { CurrentCustomer } from "./CurrentCustomer";
 import { CurrentCustomer } from "./CurrentCustomer";
 import "../../App.css";
 
