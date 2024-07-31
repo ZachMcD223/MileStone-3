@@ -3,7 +3,7 @@ import { CurrentCustomer } from './users/CurrentCustomer';
 import "aos/dist/aos.css";
 import { useNavigate } from 'react-router-dom';
 
-const ProfilePage = () => {
+export const ProfilePage = () => {
     const { currentCustomer, setCurrentCustomer } = useContext(CurrentCustomer);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();

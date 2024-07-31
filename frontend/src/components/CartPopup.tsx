@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCart } from "./CartProvider";
 import { CurrentCustomer } from "./users/CurrentCustomer";
@@ -17,11 +17,17 @@ interface CartPopupProps {
   updateItemQuantity: (id: number, quantity: number) => void;
 }
 
-const CartPopup: React.FC<CartPopupProps> = ({ isOpen, onClose, items, updateItemQuantity, }) => {
+const CartPopup: React.FC<CartPopupProps> = ({
+  isOpen,
+  onClose,
+  items,
+  updateItemQuantity,
+}) => {
   const { removeFromCart, clearCart } = useCart();
   const { currentCustomer } = React.useContext(CurrentCustomer);
   const popupRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
+  const [showThankYou, setShowThankYou] = useState(false);
 
   const handleClickOutside = useCallback(
     (event: MouseEvent) => {
@@ -44,49 +50,55 @@ const CartPopup: React.FC<CartPopupProps> = ({ isOpen, onClose, items, updateIte
     };
   }, [isOpen, handleClickOutside]);
 
-  if (!isOpen) return null;
+  if (!isOpen && !showThankYou) return null;
 
- const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
- const handleCheckoutClick = async () => {
-  if (!currentCustomer || !currentCustomer.customer_id) {
-    alert("Please log in to proceed with the checkout.");
-    return;
-  }
-
-  try {
-    const response = await fetch("http://localhost:3000/orders", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        order_date: new Date().toISOString(),
-        total: total.toFixed(2),
-        customer_id: currentCustomer.customer_id,
-      }),
-    });
-
-    if (!response.ok) {
-      throw new Error("Failed to create order");
+  const handleCheckoutClick = async () => {
+    if (!currentCustomer || !currentCustomer.customer_id) {
+      alert("Please log in to proceed with the checkout.");
+      return;
     }
 
-    const orderData = await response.json();
-    console.log("Order created:", orderData);
+    try {
+      const response = await fetch("http://localhost:3000/orders", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          order_date: new Date().toISOString(),
+          total: total.toFixed(2),
+          customer_id: currentCustomer.customer_id,
+        }),
+      });
 
-    clearCart();
-    navigate("/");
+      if (!response.ok) {
+        throw new Error("Failed to create order");
+      }
+
+      const orderData = await response.json();
+      console.log("Order created:", orderData);
+
+      clearCart();
+      setShowThankYou(true);
+    } catch (error) {
+      console.error("Error during checkout:", error);
+    }
+  };
+
+  const handleCloseThankYou = () => {
+    setShowThankYou(false);
     onClose();
-  } catch (error) {
-    console.error("Error during checkout:", error);
-  }
-};
-
- 
+    navigate("/");
+  };
 
   return (
     <>
-      <div className="fixed inset-0 bg-gray-600 bg-opacity-50 z-40" onClick={onClose}></div>
+      <div
+        className="fixed inset-0 bg-gray-600 bg-opacity-50 z-[40]"
+        onClick={onClose}
+      ></div>
       <div
         ref={popupRef}
         className="fixed right-0 top-0 h-full w-96 bg-white shadow-lg z-50 flex flex-col"
@@ -136,8 +148,8 @@ const CartPopup: React.FC<CartPopupProps> = ({ isOpen, onClose, items, updateIte
         </div>
         <div className="p-4 border-t">
           <div className="flex justify-between mb-4">
-            <span className="font-semibold">Total:</span>
-            <span className="font-semibold">${total.toFixed(2)}</span>
+            <span className="font-semibold text-2xl">Total:</span>
+            <span className="font-semibold text-2xl">${total.toFixed(2)}</span>
           </div>
           <button
             onClick={handleCheckoutClick}
@@ -147,6 +159,21 @@ const CartPopup: React.FC<CartPopupProps> = ({ isOpen, onClose, items, updateIte
           </button>
         </div>
       </div>
+
+      {showThankYou && (
+        <div className="fixed inset-0 bg-gray-600 bg-opacity-50 z-[50] flex items-center justify-center">
+          <div className="bg-white p-8 rounded-lg shadow-lg text-center">
+            <h2 className="text-2xl font-semibold mb-4">Thank You!</h2>
+            <p className="mb-4">Your order has been placed successfully.</p>
+            <button
+              onClick={handleCloseThankYou}
+              className="px-4 py-2 bg-red-700 text-white text-lg font-semibold rounded-lg shadow-md hover:bg-red-500 transition duration-300"
+            >
+              OK
+            </button>
+          </div>
+        </div>
+      )}
     </>
   );
 };

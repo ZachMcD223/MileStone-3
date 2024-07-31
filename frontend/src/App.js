@@ -31,9 +31,9 @@ function App() {
     <CartProvider>
     <div className="App">
       <Router>
-        <header>
+        
           <Header />
-        </header>
+        
         <CartWrapper />
         <main>
           <Routes>
@@ -41,7 +41,7 @@ function App() {
             <Route path="/menu" element={<Menu />} />
             <Route path="customers/sign-up" element={<SignUpForm />} />
             <Route path="customers/sign-in" element={<LoginForm />} />
-            <Route path="/checkout" element={<Checkout />} />
+            <Route path="/customers/profile" element={<ProfilePage />} />
           </Routes>
         </main>
         <footer>

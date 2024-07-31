@@ -21,6 +21,8 @@ body {
   font-family: Arial, sans-serif; 
 }
 
-.container {
-  background-color: #f3f4f6; 
+
+
+#cartpopup{
+  z-index: 0;
 }

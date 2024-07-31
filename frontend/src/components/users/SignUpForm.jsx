@@ -152,7 +152,7 @@ export default function SignUpForm() {
 
         <p className="mt-10 text-center text-sm text-gray-500">
           Already have an account?
-          <a href="/sign-in" className="font-semibold leading-6 text-red-600 hover:text-red-500"> Sign In</a>
+          <a href="/customers/sign-in" className="font-semibold leading-6 text-red-600 hover:text-red-500"> Sign In</a>
         </p>
       </div>
     </div>
