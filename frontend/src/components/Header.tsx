@@ -1,4 +1,5 @@
 // with some help from https://www.youtube.com/watch?v=78YM00SO6uk
+import React from "react";
 import Logo from "./Logo";
 import Nav from "./Nav";
 
