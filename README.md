@@ -2,8 +2,8 @@ Development team:
 
 Dylan Ennis,
 Victor Estrada,
-Zachary McDonald,
-Fahad Abdulmaseeh
+Zachary McDonald
+
 
 
 
@@ -14,6 +14,7 @@ SQL/PgAdmin 4
 React
 React Router
 Tailwind CSS
+Express
 
 
 
